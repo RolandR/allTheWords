@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+	<head>
+		<title>
+			Foo
+		</title>
+		<style>
+			body{
+				font-family: monospace;
+			}
+		</style>
+	</head>
+	<body>
+	</body>
+</html>
+
+<script type="text/javascript">
+	var alphabet = "abcdefghijklmnopqrstuvwxyz";
+	alphabet = alphabet.split("");
+	
+	var letters = 5;
+	
+	var resultString = "";
+	
+	function lettrify(layer){
+		if(layer === 0){
+			return "";
+		} else {
+			var lettrified = [];
+			for(var i in alphabet){
+				var toAppend = lettrify(layer - 1);
+				if(toAppend != ""){
+					for(var n in toAppend){
+						lettrified.push(alphabet[i] + toAppend[n]);
+					}
+				} else {
+					return alphabet;
+				}
+			}
+			return lettrified;
+		}
+	}
+	
+	var startTime = new Date().getTime();
+	
+	var result = lettrify(letters);
+	
+	var duration = new Date().getTime() - startTime;
+	console.log("Took "+duration+" Milliseconds to find all "+letters+"-letter words.");
+	var startTime = new Date().getTime();
+	
+	for(var i in result){
+		resultString += result[i] + " ";
+		if(i % 1000 === 0){
+			document.write(resultString);
+			resultString = [];
+		}
+	}
+	
+	document.write(resultString);
+	
+	var duration = new Date().getTime() - startTime;
+	console.log("Took "+duration+" Milliseconds for output.");
+	
+</script>
